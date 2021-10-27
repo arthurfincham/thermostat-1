@@ -18,6 +18,9 @@ class Thermostat {
       this.temperature -= 1;
     }
   }
+  reset() {
+    this.temperature = 20;
+  }
   getPowerSavingMode() {
     return this.psm;
   }
