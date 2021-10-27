@@ -25,7 +25,7 @@ describe('Thermostat', () => {
       thermostat.up()
       expect(thermostat.getTemperature()).toEqual(22);
     })
-  })
+  });
   describe('.down', () => {
     test('decreases the temperature by 1', () => {
       thermostat.down()
@@ -36,5 +36,24 @@ describe('Thermostat', () => {
       thermostat.down()
       expect(thermostat.getTemperature()).toEqual(18);
     })
-  })
+  });
+  describe('Power Saving Mode', () => {
+    test('is on by default', () => {
+      expect(thermostat.getPowerSavingMode()).toBe(true);
+    })
+    test('can be turned off', () => {
+      thermostat.setPowerSavingMode(false);
+      expect(thermostat.getPowerSavingMode()).toBe(false);
+    })
+    test('can be turned on again', () => {
+      thermostat.setPowerSavingMode(false);
+      thermostat.setPowerSavingMode(true);
+      expect(thermostat.getPowerSavingMode()).toBe(true);
+    })
+    test('must be provided with a boolean', () => {
+      expect(() => {
+        thermostat.setPowerSavingMode();
+      }).toThrow('Must be a boolean.')
+    })
+  });
 });
