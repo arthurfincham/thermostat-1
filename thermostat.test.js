@@ -1,7 +1,11 @@
 const Thermostat = require('./thermostat')
 
 describe('Thermostat', () => {
-  const thermostat = new Thermostat();
+
+  let thermostat;
+  beforeEach(() => {
+    thermostat = new Thermostat();
+  });
 
   describe('.getTemperature', () => {
     test('defines a function', () => {
@@ -11,4 +15,15 @@ describe('Thermostat', () => {
       expect(thermostat.getTemperature()).toEqual(20);
     })
   });
+  describe('.up', () => {
+    test('increases the temperature by 1', () => {
+      thermostat.up()
+      expect(thermostat.getTemperature()).toEqual(21);
+    })
+    test('increases the temperature by 2', () => {
+      thermostat.up()
+      thermostat.up()
+      expect(thermostat.getTemperature()).toEqual(22);
+    })
+  })
 });
