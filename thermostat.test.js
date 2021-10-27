@@ -26,4 +26,15 @@ describe('Thermostat', () => {
       expect(thermostat.getTemperature()).toEqual(22);
     })
   })
+  describe('.down', () => {
+    test('decreases the temperature by 1', () => {
+      thermostat.down()
+      expect(thermostat.getTemperature()).toEqual(19);
+    })
+    test('decreases the temperature by 2', () => {
+      thermostat.down()
+      thermostat.down()
+      expect(thermostat.getTemperature()).toEqual(18);
+    })
+  })
 });
