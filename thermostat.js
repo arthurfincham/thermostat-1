@@ -2,6 +2,8 @@ class Thermostat {
   constructor() {
     this.temperature = 20;
     this.psm = true;
+    this.minTemp = 10;
+    this.maxTemp = 25;
   }
   getTemperature() {
     return this.temperature;
@@ -10,7 +12,9 @@ class Thermostat {
     this.temperature += 1
   }
   down() {
-    this.temperature -= 1
+    if (this.temperature > this.minTemp) {
+      this.temperature -= 1;
+    }
   }
   getPowerSavingMode() {
     return this.psm;

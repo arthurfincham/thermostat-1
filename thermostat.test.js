@@ -36,6 +36,12 @@ describe('Thermostat', () => {
       thermostat.down()
       expect(thermostat.getTemperature()).toEqual(18);
     })
+    test('temperature cannot be set lower than 10', () => {
+      for (let i = 0 ; i < 20 ; i++) {
+        thermostat.down()
+      }
+      expect(thermostat.getTemperature()).toEqual(10);
+    })
   });
   describe('Power Saving Mode', () => {
     test('is on by default', () => {
