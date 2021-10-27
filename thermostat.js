@@ -35,6 +35,15 @@ class Thermostat {
       throw new Error('Must be a boolean.');
     }
   }
+  getUsage() {
+    if (this.temperature < 18) {
+      return 'Low-usage';
+    } else if (this.temperature > 25) {
+      return 'High-usage';
+    } else {
+      return 'Medium-usage';
+    }
+  }
 }
 
 module.exports = Thermostat;
