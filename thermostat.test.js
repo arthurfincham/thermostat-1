@@ -47,19 +47,34 @@ describe('Thermostat', () => {
     test('is on by default', () => {
       expect(thermostat.getPowerSavingMode()).toBe(true);
     })
-    test('can be turned off', () => {
-      thermostat.setPowerSavingMode(false);
-      expect(thermostat.getPowerSavingMode()).toBe(false);
+    describe('.setPowerSavingMode', () => {
+      test('can be turned off', () => {
+        thermostat.setPowerSavingMode(false);
+        expect(thermostat.getPowerSavingMode()).toBe(false);
+      })
+      test('can be turned on again', () => {
+        thermostat.setPowerSavingMode(false);
+        thermostat.setPowerSavingMode(true);
+        expect(thermostat.getPowerSavingMode()).toBe(true);
+      })
+      test('must be provided with a boolean', () => {
+        expect(() => {
+          thermostat.setPowerSavingMode();
+        }).toThrow('Must be a boolean.')
+      })
     })
-    test('can be turned on again', () => {
-      thermostat.setPowerSavingMode(false);
-      thermostat.setPowerSavingMode(true);
-      expect(thermostat.getPowerSavingMode()).toBe(true);
+    test('when on max temperature cannot exceed 25', () => {
+      for (let i = 0 ; i < 20 ; i++) {
+        thermostat.up()
+      }
+      expect(thermostat.getTemperature()).toEqual(25);
     })
-    test('must be provided with a boolean', () => {
-      expect(() => {
-        thermostat.setPowerSavingMode();
-      }).toThrow('Must be a boolean.')
+    test('when off max temperature cannot exceed 30', () => {
+      thermostat.setPowerSavingMode(false);
+      for (let i = 0 ; i < 20 ; i++) {
+        thermostat.up()
+      }
+      expect(thermostat.getTemperature()).toEqual(30);
     })
   });
 });
