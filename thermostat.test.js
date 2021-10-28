@@ -1,3 +1,4 @@
+const { describe } = require('jest-circus');
 const Thermostat = require('./thermostat')
 
 describe('Thermostat', () => {
@@ -106,5 +107,17 @@ describe('Thermostat', () => {
       }
       expect(thermostat.getUsage()).toEqual('Medium-usage');
     })
+  });
+
+  describe("Set city", () => {
+    test("can accept a city as an argument", () => {
+      thermostat.setCity('London');
+      expect(thermostat.getCity()).toEqual('London');
+    });
+
+    test("a new instance of Weather is called", () => {
+      thermostat.setCity("London");
+      expect(thermostat.getTemperature()).toEqual(mockWeather.temperature);
+    });
   })
 });

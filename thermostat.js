@@ -1,11 +1,14 @@
 require('dotenv').config()
+const Weather = require('./weather')
 
 class Thermostat {
-  constructor() {
+  constructor(weather) {
     this.temperature = 20;
     this.psm = true;
     this.minTemp = 10;
     this.maxTemp = 25;
+    this.city = null;
+    this.weather = weather;
   }
   getTemperature() {
     return this.temperature;
@@ -45,6 +48,15 @@ class Thermostat {
     } else {
       return 'Medium-usage';
     }
+  }
+  setCity(city){
+    this.city = city;
+    this.weather.fetchWeatherData(city, (weatherData) => {
+      this.temperature = weatherData
+    });
+  }
+  getCity(){
+    return this.city;
   }
 }
 
