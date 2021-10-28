@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 class Thermostat {
   constructor() {
     this.temperature = 20;
